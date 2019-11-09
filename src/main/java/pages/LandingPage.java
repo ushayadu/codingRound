@@ -1,34 +1,38 @@
 package pages;
 
-import base.TestBase;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-public class LandingPage extends TestBase {
 
 
-    public LandingPage() {
+public class LandingPage{
+
+    private WebDriver driver;
+
+    // Initializing web elements of Landing page
+    public LandingPage(WebDriver driver) {
+        this.driver=driver;
         PageFactory.initElements(driver,this);
     }
 
+    // element locators of landing page
     @FindBy(linkText="Your trips")
-    WebElement yourtrips;
+    private WebElement yourtrips;
 
     @FindBy(id="SignIn")
-    WebElement signInlink;
+    private WebElement signInlink;
 
     @FindBy(id="signInButton")
-    WebElement signInbutton;
+    private WebElement signInbutton;
 
     @FindBy(id="errors1")
-    WebElement signInerror;
+    private WebElement signInerror;
 
     @FindBy(linkText = "Hotels")
     private WebElement hotelLink;
 
+    // methods for landing page functionality
     public void goToYourTrips(){
         yourtrips.click();
     }
@@ -42,7 +46,7 @@ public class LandingPage extends TestBase {
         signInbutton.click();
     }
 
-    public String getsignError(){
+    public String getSignError(){
         return(signInerror.getText());
     }
 

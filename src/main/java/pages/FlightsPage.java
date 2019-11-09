@@ -1,20 +1,23 @@
 package pages;
 
-import base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FlightsPage extends  TestBase{
+public class FlightsPage{
 
-    public FlightsPage() {
+    private WebDriver driver;
+
+    // Initializing web elements of Landing page
+    public FlightsPage(WebDriver driver) {
+        this.driver=driver;
         PageFactory.initElements(driver,this);
     }
 
+    // Element locators of Flights Page
     @FindBy(id = "OneWay")
     private WebElement onewayOption;
 
@@ -39,6 +42,16 @@ public class FlightsPage extends  TestBase{
     @FindBy(className="searchSummary")
     private WebElement searchSummary;
 
+    //Getter functions
+    public WebElement getFromList() {
+        return fromList;
+    }
+
+    public WebElement getToList() {
+        return toList;
+    }
+
+    // Function specific tp page functionality actions
     public void selectOneway(){
         onewayOption.click();
     }
@@ -66,15 +79,5 @@ public class FlightsPage extends  TestBase{
         search.click();
 
     }
-    public boolean searchResult(){
-        return isElementPresent(By.className("searchSummary"));
-    }
-    private boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
+
 }

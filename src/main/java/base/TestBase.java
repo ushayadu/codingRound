@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import com.sun.javafx.PlatformUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import utils.TestUtils;
@@ -31,6 +32,8 @@ public class TestBase {
 		}
 	}
     public void setDriverPath() {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--disable-notifications");
 		if(driver==null) {
 			if (PlatformUtil.isMac()) {
 				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/chromedriver");
@@ -42,7 +45,7 @@ public class TestBase {
 			if (PlatformUtil.isLinux()) {
 				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/chromedriver_linux");
 			}
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(options);
 		 }
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();

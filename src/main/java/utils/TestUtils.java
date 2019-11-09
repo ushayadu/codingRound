@@ -1,5 +1,7 @@
 package utils;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,6 +27,13 @@ public class TestUtils {
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 		}
 	}
-
+	public boolean isElementPresent(By by,WebDriver driver) {
+		try {
+			driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
 
 }

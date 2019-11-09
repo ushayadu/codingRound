@@ -1,9 +1,7 @@
 package tests;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pages.LandingPage;
 
 public class SignInTest extends base.TestBase{
@@ -26,7 +24,7 @@ public class SignInTest extends base.TestBase{
         landingpage.signIn();
         Assert.assertTrue(landingpage.getSignError().contains("There were errors in your submission"));
     }
-    @AfterTest
+    @AfterSuite
     public void endTest(){
         driverQuit();
     }

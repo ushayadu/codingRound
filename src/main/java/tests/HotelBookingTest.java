@@ -1,8 +1,6 @@
 package tests;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.HotelsPage;
 import pages.LandingPage;
 
@@ -29,8 +27,7 @@ public class HotelBookingTest extends base.TestBase{
         hotelspage.travellersDetails("1 room, 2 adults");
         hotelspage.search();
     }
-
-    @AfterTest
+    @AfterSuite
     public void endTest(){
         driverQuit();
     }

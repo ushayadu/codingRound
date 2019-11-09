@@ -2,9 +2,7 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.FlightsPage;
 import utils.TestUtils;
 
@@ -50,7 +48,7 @@ public class FlightBookingTest extends base.TestBase{
         Assert.assertTrue(utils.isElementPresent(By.className("searchSummary"),driver));
 
     }
-    @AfterTest
+    @AfterSuite
     public void endTest(){
         driverQuit();
     }

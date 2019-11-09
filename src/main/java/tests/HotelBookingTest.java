@@ -1,11 +1,5 @@
 package tests;
 
-import com.sun.javafx.PlatformUtil;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -14,8 +8,8 @@ import pages.LandingPage;
 
 public class HotelBookingTest extends base.TestBase{
 
-    LandingPage landingpage;
-    HotelsPage hotelspage;
+    private LandingPage landingpage;
+    private HotelsPage hotelspage;
 
     public HotelBookingTest(){
         super();
@@ -24,8 +18,8 @@ public class HotelBookingTest extends base.TestBase{
     public void testSetup(){
         setDriverPath();
         navigateToUrl();
-        landingpage=new LandingPage();
-        hotelspage=new HotelsPage();
+        landingpage=new LandingPage(driver);
+        hotelspage=new HotelsPage(driver);
     }
 
     @Test

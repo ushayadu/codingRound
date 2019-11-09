@@ -1,23 +1,17 @@
 package tests;
 
-import com.sun.javafx.PlatformUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.FlightsPage;
-import pages.LandingPage;
-
-import java.util.List;
+import utils.TestUtils;
 
 public class FlightBookingTest extends base.TestBase{
-    FlightsPage flightsPage;
+
+    private FlightsPage flightsPage;
+    private TestUtils utils;
     public FlightBookingTest(){
         super();
     }
@@ -25,55 +19,40 @@ public class FlightBookingTest extends base.TestBase{
     public void testSetup(){
         setDriverPath();
         navigateToUrl();
-        flightsPage=new FlightsPage();
+        flightsPage=new FlightsPage(driver);
+        utils=new TestUtils();
     }
     @Test
     public void testThatResultsAppearForAOneWayJourney() {
 
-
-//        waitFor(2000);
         flightsPage.selectOneway();
         flightsPage.enterOrigin("Bangalore");
 
-        //wait for the auto complete options to appear for the origin
-
-        waitFor(2000);
+        //wait until the auto complete options appear & clickable for the origin
+        utils.waitUntil(flightsPage.getFromList(),driver);
 
         flightsPage.selectFirstMatchOrigin();
         flightsPage.enterDestination("Delhi");
 
-        //wait for the auto complete options to appear for the destination
+        //wait for the auto complete options appear & clickable for the destination
+        utils.waitUntil(flightsPage.getToList(),driver);
 
-        waitFor(2000);
         //select the first item from the destination auto complete list
         flightsPage.selectFirstMatchDestination();
-
         flightsPage.selectDate();
 
-        //all fields filled in. Now click on search
 
+        //all fields filled in. Now click on search
         flightsPage.search();
 
-        waitFor(5000);
+        utils.waitFor(5000);
         //verify that result appears for the provided journey search
-        Assert.assertTrue(flightsPage.searchResult());
+        Assert.assertTrue(utils.isElementPresent(By.className("searchSummary"),driver));
 
     }
     @AfterTest
     public void endTest(){
         driverQuit();
     }
-
-    private void waitFor(int durationInMilliSeconds) {
-        try {
-            Thread.sleep(durationInMilliSeconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
-
-
-
-
 
 }

@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 import pages.LandingPage;
 
 public class SignInTest extends base.TestBase{
-    LandingPage landingpage;
+
+    private LandingPage landingpage;
 
     public SignInTest(){
         super();
@@ -16,14 +17,14 @@ public class SignInTest extends base.TestBase{
     public void testSetup(){
         setDriverPath();
         navigateToUrl();
-        landingpage=new LandingPage();
+        landingpage=new LandingPage(driver);
     }
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
         landingpage.goToYourTrips();
         landingpage.navigateToSignIn();
         landingpage.signIn();
-        Assert.assertTrue(landingpage.getsignError().contains("There were errors in your submission"));
+        Assert.assertTrue(landingpage.getSignError().contains("There were errors in your submission"));
     }
     @AfterTest
     public void endTest(){
